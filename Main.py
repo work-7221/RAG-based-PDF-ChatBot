@@ -30,24 +30,29 @@ print(chunks_from_retrieved_information)
 print("="*120)
 
 
+print("✅ The document's chunks has been embedded")
 embeddings = embedder(chunks_from_retrieved_information)
-print(len(chunks_from_retrieved_information))
-print(len(embeddings))
-print(type(embeddings))
-print(embeddings.shape)
+print("="*120)
+print("✅ The embeddings has been stored in vector db")
 
 vector_db_collection = (storing_into_vectorDB(embeddings, chunks_from_retrieved_information))
+print("="*120)
 
 processed_query = query_processor()
+print("✅ A query has been asked from the user and has been processed.")
+print("="*120)
 
 compared_results = vector_db_collection.query(
     query_embeddings=processed_query[0].tolist(),
     n_results=3
 )
-print(compared_results)
 
 context = "\n\n".join(compared_results["documents"][0])
 
 
 answer_to_query = generate_answer(build_prompt(processed_query[1], context))
+print("✅ The query has been send to the LLM with the context from the provided knowledge base.")
 print(answer_to_query)
+print("="*120)
+print("✅ A response from the Local LLM has been geenrated")
+print("="*120)
