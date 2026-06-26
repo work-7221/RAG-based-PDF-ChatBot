@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 .env
 Chroma_Database/
+PDFs/
