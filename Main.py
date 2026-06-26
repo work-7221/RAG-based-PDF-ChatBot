@@ -6,7 +6,8 @@ from Functions.Querior_Processor import query_processor
 from Functions.Ollama_LLM import generate_answer
 from Functions.prompt_builder import build_prompt
 
-pages = reader_function("PDFs/research_upperBody.pdf")
+path = input("Enter the path: ")
+pages = reader_function(path)
 
 
 print("="*120)
@@ -35,7 +36,7 @@ embeddings = embedder(chunks_from_retrieved_information)
 print("="*120)
 print("✅ The embeddings has been stored in vector db")
 
-vector_db_collection = (storing_into_vectorDB(embeddings, chunks_from_retrieved_information))
+vector_db_collection = (storing_into_vectorDB(embeddings, chunks_from_retrieved_information, path))
 print("="*120)
 
 processed_query = query_processor()
