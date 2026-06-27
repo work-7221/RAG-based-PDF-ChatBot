@@ -1,6 +1,6 @@
-from Functions.PDF_Loader import reader_function
-from Functions.chunker import chunk_text
-from Functions.embedding_generation import embedder
+# from Functions.PDF_Loader import reader_function
+# from Functions.chunker import chunk_text
+# from Functions.embedding_generation import embedder
 from Functions.storing_function_VDB import storing_into_vectorDB
 from Functions.storing_function_VDB import check_for_collection
 from Functions.Querior_Processor import query_processor
@@ -8,7 +8,6 @@ from Functions.Ollama_LLM import generate_answer
 from Functions.prompt_builder import build_prompt
 
 path = input("Enter the path: ")
-pages = reader_function(path)
 condition = True
 
 print("="*120)
@@ -18,26 +17,8 @@ print("="*120)
 if not (check_for_collection(path)):
     condition = False
     print("The file's context is not there in the database, we will add the context to the databse.")
-    retrieved_information = reader_function(path)
-    chunks_from_retrieved_information = chunk_text(retrieved_information)
-
-
-    print("✅ The document's content has been retrieved")
     print("="*120)
 
-    print(retrieved_information)
-    print("="*120)
-    print("✅ The document's content has been chunked down")
-    print("="*120)
-
-    print(chunks_from_retrieved_information)
-    print("="*120)
-
-
-    print("✅ The document's chunks has been embedded")
-    embeddings = embedder(chunks_from_retrieved_information)
-    print("="*120)
-    print("✅ The embeddings has been stored in vector db")
 
     vector_db_collection = storing_into_vectorDB(condition, path)
     print("="*120)
@@ -46,6 +27,7 @@ else:
 
 
 processed_query = query_processor()
+print("="*120)
 print("✅ A query has been asked from the user and has been processed.")
 print("="*120)
 
