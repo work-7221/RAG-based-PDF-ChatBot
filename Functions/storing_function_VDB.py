@@ -1,29 +1,27 @@
 import chromadb
 import os
+import streamlit as st
 from Functions.embedding_generation import embedder
 from Functions.chunker import chunk_text
 from Functions.PDF_Loader import reader_function
 from Functions.chunker import chunk_text
 from Functions.embedding_generation import embedder
-file_path = ""
+# file_path = ""
 
-def check_for_collection(file_path):
+def check_for_collection_in_database(file):
     client = chromadb.PersistentClient(path = "Chroma_Database")
     all_collections = client.list_collections()
     for collection in all_collections:
-        if (collection.name == f"{os.path.basename(file_path)}_collection"):
+        if (collection.name == f"{file.name}_collection"):
             return True
     
-    file_path = file_path
-
     return False
 
-def storing_into_vectorDB(condition,
-                          file_path,
+def storing_collection_into_database(condition,
+                          file,
                           ):
     if (condition == False):
-        retrieved_information = reader_function(file_path)
-        chunks_from_retrieved_information = chunk_text(retrieved_information)
+        retrieved_information = file.read()
 
 
         print("✅ The document's content has been retrieved")
@@ -31,6 +29,7 @@ def storing_into_vectorDB(condition,
 
         print(retrieved_information)
         print("="*120)
+        chunks_from_retrieved_information = chunk_text(retrieved_information)
         print("✅ The document's content has been chunked down")
         print("="*120)
 
@@ -49,9 +48,9 @@ def storing_into_vectorDB(condition,
     client = chromadb.PersistentClient(path = "Chroma_Database")
 
     if (condition == True):
-        collection = client.get_collection(f"{os.path.basename(file_path)}_collection")
+        collection = client.get_collection(f"{file.name}_collection")
     else:
-        collection = client.create_collection(f"{os.path.basename(file_path)}_collection")
+        collection = client.create_collection(f"{file.name}_collection")
     
         collection.add(
         documents=chunks_from_retrieved_information,

@@ -1,8 +1,7 @@
+import streamlit as st
 from Functions.embedding_generation import embedder
 
-def query_processor():
-
-    query = input("Ask your question related to the document: ")
+def query_processor(query):
 
     processed_query = embedder(query)
 
