@@ -12,7 +12,7 @@ def check_for_collection_in_database(file):
     client = chromadb.PersistentClient(path = "Chroma_Database")
     all_collections = client.list_collections()
     for collection in all_collections:
-        if (collection.name == f"{file.name}_collection"):
+        if (collection.name == f"{file[1]}_collection"):
             return True
     
     return False
@@ -20,8 +20,9 @@ def check_for_collection_in_database(file):
 def storing_collection_into_database(condition,
                           file,
                           ):
+    
     if (condition == False):
-        retrieved_information = file.read()
+        retrieved_information = file[0] 
 
 
         print("✅ The document's content has been retrieved")
@@ -48,14 +49,17 @@ def storing_collection_into_database(condition,
     client = chromadb.PersistentClient(path = "Chroma_Database")
 
     if (condition == True):
-        collection = client.get_collection(f"{file.name}_collection")
+        collection = client.get_collection(f"{file[1]}_collection")
+        collection = collection
     else:
-        collection = client.create_collection(f"{file.name}_collection")
+        collection = client.create_collection(f"{file[1]}_collection")
     
+        collection = collection 
         collection.add(
         documents=chunks_from_retrieved_information,
         embeddings=embeddings.tolist(),  # Converts your NumPy array to a Python list
         ids=[f"chunk_{i}" for i in range(len(chunks_from_retrieved_information))]
         )
+        print(condition)
 
     return collection

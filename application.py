@@ -1,5 +1,6 @@
 import streamlit as st
 from Main import Main_Functionality
+from Functions.PDF_Loader import reader_function
 
 st.title("📚RAG based PDF Chatbot")
 
@@ -14,17 +15,20 @@ for msg in st.session_state.messages:
 
 # 4. If needed, get the required document.
 uploaded_file = st.file_uploader("Upload your PDF document", type = ["PDF"])
-
+if (uploaded_file != None):
+        st.write(type(uploaded_file))
+        uploaded_file = [reader_function(uploaded_file), uploaded_file.name]
 # 1. Dedicated RAG logic placeholder
 def run_rag_pipeline(user_query):
     # --- INSERT YOUR RAG LOGIC HERE ---
     # 1. Vector search: docs = vector_store.similarity_search(user_query)
     # 2. LLM Generation: response = llm.invoke(docs + user_query)
-    
+
+        
     answer = Main_Functionality(uploaded_file, user_query)
+    st.write(f"{type(uploaded_file)}")
 
-
-    return f"Answer to your query: {answer}"
+    return answer
 
 # 5. Handle new user input
 if prompt := st.chat_input("Ask a question about your data..."):

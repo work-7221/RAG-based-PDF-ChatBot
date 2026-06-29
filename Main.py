@@ -1,6 +1,7 @@
 # from Functions.PDF_Loader import reader_function
 # from Functions.chunker import chunk_text
 # from Functions.embedding_generation import embedder
+import streamlit as st
 from Functions.storing_function_VDB import storing_collection_into_database
 from Functions.storing_function_VDB import check_for_collection_in_database
 from Functions.Querior_Processor import query_processor
@@ -8,7 +9,7 @@ from Functions.Ollama_LLM import generate_answer
 from Functions.prompt_builder import build_prompt
 
 
-def Main_Functionality(PDF_document_from_streamlit, query):
+def Main_Functionality(PDF_content_from_streamlit, query):
 
     print("="*120)
     print("✅ All imports successful!")
@@ -16,12 +17,12 @@ def Main_Functionality(PDF_document_from_streamlit, query):
 
     context = ""
 
-    file = PDF_document_from_streamlit
-
+    file = PDF_content_from_streamlit
+    processed_query = query_processor(query)
+    condition = True
     if file is not None:
-        condition = True
 
-        if not (check_for_collection_in_database(file)):
+        if (check_for_collection_in_database(f"{file[1]}_collection")):
 
             condition = False
 
@@ -29,7 +30,7 @@ def Main_Functionality(PDF_document_from_streamlit, query):
 
             print("="*120)
 
-            vector_db_collection = storing_collection_into_database(condition, file.name)
+            vector_db_collection = storing_collection_into_database(condition, file)
 
             print("="*120)
 
@@ -41,7 +42,7 @@ def Main_Functionality(PDF_document_from_streamlit, query):
             context = "\n\n".join(compared_results["documents"][0])
 
         else:
-            vector_db_collection = storing_collection_into_database(condition, file.name)
+            vector_db_collection = storing_collection_into_database(condition, file)
 
             compared_results = vector_db_collection.query(
                 query_embeddings=processed_query[0].tolist(),
@@ -51,7 +52,6 @@ def Main_Functionality(PDF_document_from_streamlit, query):
             context = "\n\n".join(compared_results["documents"][0])
 
 
-    processed_query = query_processor(query)
 
     print("="*120)
     print("✅ A query has been asked from the user and has been processed.")
