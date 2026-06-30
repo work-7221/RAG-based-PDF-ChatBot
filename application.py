@@ -1,6 +1,17 @@
 import streamlit as st
+import Testing
 from Main import Main_Functionality
 from Functions.PDF_Loader import reader_function
+
+import subprocess as sb
+path_to_ipex_directory = r"C:\Users\work_\IPEX_OLLAMA"
+process1 = sb.Popen(
+    'start-ollama',
+    cwd = path_to_ipex_directory,
+    text = True,    
+    shell = True
+)
+process1.wait()
 
 st.title("📚RAG based PDF Chatbot")
 
