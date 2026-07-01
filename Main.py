@@ -19,18 +19,15 @@ def Main_Functionality(PDF_content_from_streamlit, query):
 
     file = PDF_content_from_streamlit
     processed_query = query_processor(query)
-    condition = True
+    check_for_collection = check_for_collection_in_database(f"{file[1]}_collection")
     if file is not None:
-
-        if (check_for_collection_in_database(f"{file[1]}_collection")):
-
-            condition = False
-
+        print("THE FILE IS NOT NONE")
+        if (check_for_collection == False):
+            print("THE FILE'S COLLECTION IS NOT THERE IN THE DB")
             print("The file's context is not there in the database, we will add the context to the database.")
-
             print("="*120)
-
-            vector_db_collection = storing_collection_into_database(condition, file)
+            # the collection is not there in the DB
+            vector_db_collection = storing_collection_into_database(False, file)
 
             print("="*120)
 
@@ -42,7 +39,8 @@ def Main_Functionality(PDF_content_from_streamlit, query):
             context = "\n\n".join(compared_results["documents"][0])
 
         else:
-            vector_db_collection = storing_collection_into_database(condition, file)
+            # the collection is there in the DB
+            vector_db_collection = storing_collection_into_database(True, file)
 
             compared_results = vector_db_collection.query(
                 query_embeddings=processed_query[0].tolist(),

@@ -1,9 +1,14 @@
 def build_prompt(question, context):
-    return f"""
-    You are an AI assistant.
-    Your task is to give answer to using below aspects along with your insights.
-    
-    Question: {question}
-    Context: {context}
-    Answer: 
+    prompt = f"""
+            You are a helpful AI assistant.
+
+            Answer ONLY the user's question.
+
+            Question:
+            {question}
+
+            Context:
+            {context}
     """
+
+    return prompt
