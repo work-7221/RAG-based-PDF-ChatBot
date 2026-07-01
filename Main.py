@@ -19,8 +19,9 @@ def Main_Functionality(PDF_content_from_streamlit, query):
 
     file = PDF_content_from_streamlit
     processed_query = query_processor(query)
-    check_for_collection = check_for_collection_in_database(f"{file[1]}_collection")
+    
     if file is not None:
+        check_for_collection = check_for_collection_in_database(f"{file[1]}_collection")
         print("THE FILE IS NOT NONE")
         if (check_for_collection == False):
             print("THE FILE'S COLLECTION IS NOT THERE IN THE DB")
