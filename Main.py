@@ -9,7 +9,7 @@ from Functions.Ollama_LLM import generate_answer
 from Functions.prompt_builder import build_prompt
 
 
-def Main_Functionality(PDF_content_from_streamlit, query):
+def Main_Functionality(PDF_content_from_streamlit, query, ongoing):
 
     print("="*120)
     print("✅ All imports successful!")
@@ -19,7 +19,7 @@ def Main_Functionality(PDF_content_from_streamlit, query):
 
     file = PDF_content_from_streamlit
     processed_query = query_processor(query)
-    
+
     if file is not None:
         check_for_collection = check_for_collection_in_database(f"{file[1]}_collection")
         print("THE FILE IS NOT NONE")
@@ -53,12 +53,13 @@ def Main_Functionality(PDF_content_from_streamlit, query):
 
 
     print("="*120)
-    print("✅ A query has been asked from the user and has been processed.")
+    print(f"✅ A query has been asked from the user and has been processed: {processed_query[1]}")
     print("="*120)
+    
 
 
-
-    answer_to_query = generate_answer(build_prompt(processed_query[1], context))
+    prompt = build_prompt(processed_query[1], context, ongoing)
+    answer_to_query = generate_answer(prompt)
 
     print("✅ The query has been sent to the LLM with the context from the provided knowledge base.")
 
