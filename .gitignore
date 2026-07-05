@@ -4,3 +4,4 @@ __pycache__/
 .env
 Chroma_Database/
 PDFs/
+Chat_History/
