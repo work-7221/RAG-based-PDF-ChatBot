@@ -6,29 +6,46 @@ from Functions.extracting_chats import extract_chats
 from Functions.updating_chats import update_chats
 import ast
 
-path_to_ipex_directory = r"C:\Users\work_\IPEX_OLLAMA"
-process = sb.Popen(
-    'start-ollama',
-    cwd = path_to_ipex_directory,
-    text = True,
-    shell = True
-)
-process.wait()
+if ("ollama_started" not in st.session_state):
+
+    path_to_ipex_directory = r"C:\Users\work_\IPEX_OLLAMA"
+    process = sb.Popen(
+        'start-ollama',
+        cwd = path_to_ipex_directory,
+        text = True,
+        shell = True
+    )
+    process.wait()
+
+    st.session_state.ollama_started = True
+
+with st.sidebar:
+    if st.button("← Chats", use_container_width=True):
+        st.switch_page("Chat_History_Selection.py")
 
 # @st.fragment
 # def application_fragment():
 st.title("📚RAG based PDF Chatbot")
 
+if "selected_chat" not in st.session_state:
+    st.warning("Please select a chat first.")
+    st.stop()
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+chat_name = st.session_state.selected_chat
 
+if (
+    "loaded_chat" not in st.session_state
+    or st.session_state.loaded_chat != chat_name
+):
 
+    chat_data = extract_chats(chat_name)
 
-if "chats" not in st.session_state:
-     st.session_state.chats = extract_chats("first_chat") # connect the chat directory here, and on the basis of selection extract the chat content from the the file (chat_history folder)
-     st.session_state.messages = ast.literal_eval(st.session_state.chats)
-    # conversation = ast.literal_eval(data_string)
+    if chat_data:
+        st.session_state.messages = ast.literal_eval(chat_data)
+    else:
+        st.session_state.messages = []
+
+    st.session_state.loaded_chat = chat_name
 
 
 ongoing_context = st.session_state.messages
@@ -69,5 +86,5 @@ if prompt:
     st.chat_message("assistant").write(answer)
     st.session_state.messages.append({"role": "assistant", "content": answer})
 
-    update_chats("first_chat", str(st.session_state.messages))
+    update_chats(chat_name, str(st.session_state.messages))
 # application_fragment()
