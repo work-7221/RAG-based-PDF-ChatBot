@@ -288,14 +288,19 @@ streamlit run app.py
 
 - Landing Page
 <img src = "screenshots\ss1.png">
+
 - Chat Interface
 <img src = "screenshots\ss2.png">
+
 - Upload PDF
 <img src = "screenshots\ss3.png">
+
 - Generated Answers
 <img src = "screenshots\ss4.png">
+
 - Background Processes
 <img src = "screenshots\ss5.png">
+
 ---
 
 # 🚀 Future Improvements
