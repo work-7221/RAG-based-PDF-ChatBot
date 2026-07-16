@@ -286,8 +286,6 @@ streamlit run app.py
 
 # 📷 Screenshots
 
-> Add screenshots of:
-
 - Landing Page
 <img src = "screenshots\ss1.png">
 - Chat Interface
