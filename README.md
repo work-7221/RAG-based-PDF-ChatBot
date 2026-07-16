@@ -1,4 +1,4 @@
-# 🚀 Local RAG PDF Assistant
+# Local RAG PDF Assistant
 
 <div align="center">
 
@@ -21,7 +21,7 @@ No OpenAI API. No cloud inference. Your documents stay on your machine.
 
 ---
 
-# 📖 Overview
+# Overview
 
 This project is a **fully local RAG (Retrieval-Augmented Generation) system** that allows users to upload PDF documents and ask natural language questions about their contents.
 
@@ -29,31 +29,45 @@ Instead of relying on cloud APIs, the entire pipeline runs **locally**, making t
 
 The application combines:
 
-- 📄 PDF Processing
-- ✂️ Intelligent Text Chunking
-- 🧠 Semantic Embeddings
-- 🗄️ Chroma Vector Database
-- 🤖 Local LLM (Ollama)
-- ⚡ Intel IPEX-LLM Optimized Runtime
-- 💬 Interactive Streamlit Chat Interface
+- PDF Processing
+- Intelligent Text Chunking
+- Semantic Embeddings
+- Chroma Vector Database
+- Local LLM (Ollama)
+- Intel IPEX-LLM Optimized Runtime
+- Interactive Streamlit Chat Interface
+
+---
+# Learning Outcomes
+
+This project helped me gain practical experience with:
+
+- Retrieval-Augmented Generation (RAG)
+- Vector Databases
+- Semantic Search
+- Local Large Language Models
+- Embedding Models
+- Prompt Engineering
+- Streamlit Application Development
+- Intel AI Software Stack
+- Modular AI System Design
+
+---
+# Features
+
+- Upload one or multiple PDF documents
+- Chat with uploaded PDFs
+- Semantic similarity search
+- Persistent Chroma Vector Database
+- Fully Local Inference
+- No external API required
+- Conversation history
+- Intel IPEX-LLM accelerated inference
+- Modular project architecture
 
 ---
 
-# ✨ Features
-
-- 📄 Upload one or multiple PDF documents
-- 💬 Chat with uploaded PDFs
-- 🧠 Semantic similarity search
-- 🗄️ Persistent Chroma Vector Database
-- ⚡ Fully Local Inference
-- 🔒 No external API required
-- 📚 Conversation history
-- 🚀 Intel IPEX-LLM accelerated inference
-- 🧩 Modular project architecture
-
----
-
-# 🏗️ System Architecture
+# System Architecture
 
 ```
 
@@ -89,7 +103,7 @@ The application combines:
 
 ---
 
-# ⚙️ Technology Stack
+# Technology Stack
 
 | Component | Technology |
 |------------|------------|
@@ -105,7 +119,7 @@ The application combines:
 
 ---
 
-# 🧠 RAG Pipeline
+# RAG Pipeline
 
 The application follows a Retrieval-Augmented Generation workflow:
 
@@ -240,7 +254,7 @@ RAG-PDF-Assistant/
 
 ---
 
-# 🚀 Installation
+# Installation
 
 Clone the repository
 
@@ -284,7 +298,7 @@ streamlit run app.py
 
 ---
 
-# 📷 Screenshots
+# Screenshots
 
 - Landing Page
 <img src = "screenshots\ss1.png">
@@ -303,7 +317,7 @@ streamlit run app.py
 
 ---
 
-# 🚀 Future Improvements
+# Future Improvements
 
 This project serves as the foundation for a more advanced production-style RAG system.
 
@@ -322,23 +336,7 @@ Planned improvements include:
 
 ---
 
-# 🎯 Learning Outcomes
-
-This project helped me gain practical experience with:
-
-- Retrieval-Augmented Generation (RAG)
-- Vector Databases
-- Semantic Search
-- Local Large Language Models
-- Embedding Models
-- Prompt Engineering
-- Streamlit Application Development
-- Intel AI Software Stack
-- Modular AI System Design
-
----
-
-# 🤝 Contributing
+# Contributing
 
 Contributions, suggestions, and improvements are welcome.
 
@@ -346,13 +344,13 @@ Feel free to open an issue or submit a pull request.
 
 ---
 
-# 📜 License
+# License
 
 This project is released under the Apache 2.0 License.
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Rohan Kumar Maharana**
 
