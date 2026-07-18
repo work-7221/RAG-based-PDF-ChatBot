@@ -213,11 +213,11 @@ Instead of using the default Ollama runtime alone, the application utilizes **In
 
 ### Benefits
 
-- ⚡ Faster local inference
-- 💻 Better utilization of Intel hardware
-- 🔒 Completely offline execution
-- 🚀 Improved response generation
-- ☁️ No cloud APIs required
+- Faster local inference
+- Better utilization of Intel hardware
+- Completely offline execution
+- Improved response generation
+- No cloud APIs required
 
 This enables an efficient local AI workflow while maintaining complete data privacy.
 
@@ -321,9 +321,9 @@ streamlit run app.py
 
 This project serves as the foundation for a more advanced production-style RAG system.
 
-Planned improvements include:
+Improvements include:
 
-- Semantic Chunking
+- Semantic Chunking (implemented)
 - Hybrid Search (BM25 + Dense Retrieval)
 - Metadata Filtering
 - Query Rewriting
@@ -333,6 +333,20 @@ Planned improvements include:
 - Source Citations
 - Retrieval Evaluation
 - Improved UI/UX
+
+| Features | Status |
+| -------- | -------- |
+| Semantic Chunking |  ✅Implemented |
+| Hybrid Search (BM25 + Dense Retrieval) |  ➡️next up |
+|  Metadata Filtering |  ➡️next up |
+|  Query Rewriting | ❗Planned  |
+|  Multi-Query Retrieval |  ❗Planned |
+|  Cross-Encoder Re-ranking |  ❗Planned |
+|  Context Compression |   ❗Planned|
+|  Source Citations |  ❗Planned |
+|  Retrieval Evaluation |  ❗Planned |
+|  Improved UI/UX |  ❗Planned |
+
 
 ---
 
@@ -352,7 +366,7 @@ This project is released under the Apache 2.0 License.
 
 # Author
 
-**Rohan Kumar Maharana**
+**Rohan Kumar Maharana** 
 
 
 Building AI Systems • RAG • Agentic AI • Full Stack AI
