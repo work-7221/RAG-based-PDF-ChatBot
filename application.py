@@ -54,10 +54,20 @@ print(ongoing_context)
 # 3. Render chat history
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
-uploaded_file = st.file_uploader("Upload your PDF document", type = ["PDF"])
-if (uploaded_file != None):
-        # st.write(type(uploaded_file))
-        uploaded_file = [reader_function(uploaded_file), uploaded_file.name]
+
+
+# this stops reader_function (full pdf text extraction)
+# from rerunning on every chat message; it only runs again if the uploaded file actually changes.
+uploaded_file_raw = st.file_uploader("Upload your PDF document", type = ["PDF"])
+if (uploaded_file_raw != None):
+        file_key = f"{uploaded_file_raw.name}_{uploaded_file_raw.size}"
+        if st.session_state.get("processed_file_key") != file_key:
+            st.session_state.processed_pdf_text = reader_function(uploaded_file_raw)
+            st.session_state.processed_file_key = file_key
+        uploaded_file = [st.session_state.processed_pdf_text, uploaded_file_raw.name]
+else:
+        uploaded_file = None
+
 # 1. Dedicated RAG logic placeholder
 def run_rag_pipeline(user_query):
     # --- INSERT YOUR RAG LOGIC HERE ---
