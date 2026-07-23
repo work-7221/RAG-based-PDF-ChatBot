@@ -1,7 +1,7 @@
 import nltk
 import numpy as np
 from nltk.tokenize import sent_tokenize
-from sentence_transformers import SentenceTransformer
+from Functions.embedding_generation import model
 
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -16,7 +16,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 #     return chunks
 def chunk_text(text):
 
-    model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+    # model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2") reloads a 2nd full model 
 
     sentences = sent_tokenize(text)
     embeddings = model.encode(sentences)
@@ -24,9 +24,9 @@ def chunk_text(text):
     # 1. Calculate all consecutive similarities
     similarities = []
     for i in range(len(embeddings) - 1):
-        sim = cosine_similarity([embeddings[i]], [embeddings[i + 1]])[0][0]
+        sim = cosine_similarity([embeddings[i]], [embeddings[i + 1]])
         similarities.append(sim)
-        print(f"Sentence {i+1} ↔ Sentence {i+2}: {sim:.4f}")
+        print(f"Sentence {i+1} ↔ Sentence {i+2}: {sim[0][0]:.4f}")
 
     # 2. Compute a dynamic threshold based on distances (1 - similarity)
     # Larger distance means a bigger topic shift
