@@ -316,7 +316,14 @@ streamlit run app.py
 <img src = "screenshots\ss5.png">
 
 ---
+# Demo Video
+Video showing the flow of the application.
+<video>
+  <source src = "demo video/recording_final.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
+---
 
 # Future Improvements
 
